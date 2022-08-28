@@ -1,6 +1,7 @@
 package co.zw.afrosoft.telone_gcp.service;
 
 import co.zw.afrosoft.telone_gcp.persistence.GcpRepository;
+import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,6 +48,15 @@ public class GcpServiceImpl implements GcpService {
         gcp.setUrl(info.getMediaLink());
         gcp.setFileType(String.valueOf(fileType));
         return gcpRepository.save(gcp);
+    }
+
+    @Override
+    public String downloadFile (String fileName) throws IOException{
+        String home = System.getProperty("user.home");
+        File file = new File(home+"/Downloads/");
+        Blob blob = storage.get("my_aggr_files", fileName);
+        blob.downloadTo(Paths.get(String.valueOf(file), fileName));
+        return fileName + " has been downloaded successfully";
     }
 
     @Override

@@ -15,6 +15,8 @@ public interface GcpService {
 
     Gcp uploadFile(MultipartFile file) throws IOException;
 
+    String downloadFile (String fileName) throws IOException;
+
     GcpDto updateFile(Long fileId, GcpUpdateRequest gcpUpdateRequest);
 
     void delete(Long fileId);
