@@ -52,10 +52,12 @@ public class GcpServiceImpl implements GcpService {
 
     @Override
     public String downloadFile (String fileName) throws IOException{
+        Gcp gcp = new Gcp();
+        String name =gcp.setName(fileName);
         String home = System.getProperty("user.home");
         File file = new File(home+"/Downloads/");
-        Blob blob = storage.get("my_aggr_files", fileName);
-        blob.downloadTo(Paths.get(String.valueOf(file), fileName));
+        Blob blob = storage.get("my_aggr_files", name);
+        blob.downloadTo(Paths.get(String.valueOf(file), name));
         return fileName + " has been downloaded successfully";
     }
 

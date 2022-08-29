@@ -3,10 +3,7 @@ package co.zw.afrosoft.telone_gcp.api;
 import co.zw.afrosoft.telone_gcp.domain.Gcp;
 import co.zw.afrosoft.telone_gcp.service.GcpService;
 import com.google.cloud.storage.Storage;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
@@ -29,7 +26,7 @@ public class GcpController {
     }
 
     @GetMapping("/get-data")
-    public String downloadFile (String fileName) throws IOException{
+    public String downloadFile(String fileName) throws IOException{
         return gcpService.downloadFile(fileName);
         }
 
